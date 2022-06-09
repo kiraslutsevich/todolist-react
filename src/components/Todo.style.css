@@ -1,4 +1,4 @@
-.todo{
+.todo {
   text-align: left;
   width: 250px;
   height: fit-content;
@@ -10,13 +10,15 @@
   justify-content: space-between;
   align-items: center;
 }
-.todo-p{
+
+.todo-text {
   margin-block-start: 0;
   margin-block-end: 0;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
 }
-.todo-delete{
+
+.todo-delete {
   width: 22px;
   height: 22px;
 }

@@ -6,32 +6,45 @@ import TodoList from './components/TodoList';
 
 function App() {
   const [arrTodo, setArrTodo] = useState([]);
-  const [value, setValue] = useState('');
 
-  const addNewTaskHandler = () => {
+  // const [checked, setChecked] = useState()
+
+  const addNewTaskHandler = (value) => {
     if (value === '') {
       return
     }
     const task = {
       text: value,
-      isChecked: false,
+      isActive: false,
       id: Math.floor(Math.random() * 10000),
     }
     const newArr = [...arrTodo, task];
     setArrTodo(newArr);
-    setValue('');
+  }
+
+  const handleTaskUpdate = (id, data) => {
+    const newArr = arrTodo.map((item) => item.id === id ? data : item);
+    setArrTodo(newArr);
   }
 
   const deleteTaskHandler = (id) => {
-    const newArr = arrTodo.filter(task => task.id != id);
+    const newArr = arrTodo.filter(task => task.id !== id);
     setArrTodo(newArr);
   }
 
   return (
     <div className="app">
       <Header />
-      <TodoInput value={value} setValue={setValue} addNewTaskHandler={addNewTaskHandler} />
-      <TodoList arrTodo={arrTodo} deleteTaskHandler={deleteTaskHandler} />
+
+      <TodoInput
+        addNewTaskHandler={addNewTaskHandler}
+      />
+
+      <TodoList
+        arrTodo={arrTodo}
+        deleteTaskHandler={deleteTaskHandler}
+        onTaskUpdate={handleTaskUpdate}
+      />
     </div>
   );
 }
