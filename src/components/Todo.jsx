@@ -1,18 +1,18 @@
-import styles from './Todo.style.css'
+import styles from './Todo.module.css'
 
 const Todo = (props) => {
   const { task, deleteTaskHandler, onTaskUpdate } = props;
 
   return (
-    <div className="todo">
+    <div className={styles.todo}>
       <input
         type="checkbox"
         checked={task.isActive}
         onChange={() => onTaskUpdate(task.id, { ...task, isActive: !task.isActive })}
       />
-      <p className="todo-text">{task.text}</p>
+      <p className={styles.todoText}>{task.text}</p>
       <button
-        className="todo-delete"
+        className={styles.todoDelete}
         onClick={() => deleteTaskHandler(task.id)}
       >
         x
