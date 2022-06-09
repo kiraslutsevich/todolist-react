@@ -1,7 +1,7 @@
-import './todo-input.css';
+import './TodoInput.style.css';
 
 const TodoInput = (props) => {
-  const { value, setValue, addNewTaskHandler } = props
+  const { value, setValue, addNewTaskHandler } = props;
   return (
     <div className='todo-input'>
       <input value={value} onChange={(e) => setValue(e.target.value)}></input>

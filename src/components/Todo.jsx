@@ -1,12 +1,12 @@
-import './todo.css'
+import './Todo.style.css'
 
 const Todo = (props) => {
-  const { task } = props
+  const { text, id, deleteTaskHandler } = props;
   return (
     <div className="todo">
-      <p className="todo-p">{task}</p>
-      <button className='todo-delete'>x</button>
-    </div>
+      <p className="todo-p">{text}</p>
+      <button className="todo-delete" id={id} onClick={() => deleteTaskHandler(id)}>x</button>
+    </div >
   )
 }
 
