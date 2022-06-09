@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Header from './components/Header';
+import TodoInput from './components/TodoInput';
+import TodoList from './components/TodoList';
 
 function App() {
+  const [arrTodo, setArrTodo] = useState([]);
+  const [value, setValue] = useState('')
+
+  const addNewTaskHandler = () => {
+    if (value === '') {
+      return
+    }
+    const newArr = [...arrTodo, value]
+    setArrTodo(newArr)
+    setValue('')
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Header />
+      <TodoInput value={value} setValue={setValue} addNewTaskHandler={addNewTaskHandler} />
+      <TodoList arrTodo={arrTodo} />
     </div>
   );
 }
