@@ -1,4 +1,4 @@
-.todo-input{
+.input{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6,7 +6,7 @@
   padding: 10px;
 }
 
-.input-btn{
+.btn{
   height: 20px;
   background-color: darksalmon;
 }

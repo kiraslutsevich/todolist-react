@@ -11,14 +11,19 @@
   align-items: center;
 }
 
-.todoText {
+.none {
+  display: none;
+}
+
+
+.text {
   margin-block-start: 0;
   margin-block-end: 0;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
 }
 
-.todoDelete {
+.delete {
   width: 22px;
   height: 22px;
 }

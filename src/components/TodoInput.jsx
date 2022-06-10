@@ -1,17 +1,26 @@
 import { useState } from 'react';
 
-import './TodoInput.style.css';
+import styles from './TodoInput.module.css'
 
 const TodoInput = (props) => {
-  const { addNewTaskHandler } = props;
+  const { onAddNewTask } = props;
   const [value, setValue] = useState('');
   return (
-    <div className="todo-input">
-      <input value={value} onChange={(e) => setValue(e.target.value)} />
-      <button className="input-btn" onClick={() => {
-        addNewTaskHandler(value)
-        setValue('')
-      }}
+    <div
+      className={styles.input}
+    >
+      <input
+        value={value}
+        onChange={(e) => {
+          setValue(e.target.value)
+        }}
+      />
+      <button
+        className={styles.btn}
+        onClick={() => {
+          onAddNewTask(value)
+          setValue('')
+        }}
       >
         +
       </button>
