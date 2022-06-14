@@ -1,15 +1,18 @@
 import styles from './Category.module.css';
 
 const Category = (props) => {
-  const { onChooseTaskList } = props;
+  const { text, status, id, onButtonsStatusChange } = props;
 
   return (
     <button
-      onClick={(e) => onChooseTaskList(e.target.textContent)}
+      className={status === 'on' ? styles.active : styles.passive}
+      onClick={() => onButtonsStatusChange(id)}
     >
-      {props.text}
-    </button>
+      {text}
+    </button >
   )
 }
+
+
 
 export default Category;

@@ -2,24 +2,20 @@ import styles from './Filtres.module.css';
 import Category from './Category';
 
 const Filtres = (props) => {
-  const { onChooseTaskList } = props;
+  const { arrBtns, onButtonsStatusChange } = props;
+
   return (
     <div className={styles.list}>
-      <Category
-        text="All"
+      {arrBtns.map(btn =>
+      (<Category
         key={Math.floor(Math.random() * 10000)}
-        onChooseTaskList={onChooseTaskList}
+        text={btn.text}
+        status={btn.status}
+        id={btn.id}
+        onButtonsStatusChange={onButtonsStatusChange}
       />
-      <Category
-        text="Active"
-        key={Math.floor(Math.random() * 10000)}
-        onChooseTaskList={onChooseTaskList}
-      />
-      <Category
-        text="Completed"
-        key={Math.floor(Math.random() * 10000)}
-        onChooseTaskList={onChooseTaskList}
-      />
+      )
+      )}
     </div>
   )
 }

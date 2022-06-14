@@ -2,9 +2,8 @@ import styles from './Todo.module.css'
 
 const Todo = (props) => {
   const { task, onTaskDelete, onTaskUpdate } = props;
-  console.log(task.display)
   return (
-    <div className={styles.todo} >
+    <div className={styles.todo}>
       <input
         type="checkbox"
         checked={task.isActive}

@@ -6,10 +6,30 @@ import TodoList from './components/TodoList';
 import Footer from './components/Footer';
 
 
+
 function App() {
   const [arrTodo, setArrTodo] = useState([]);
 
-  // const [checked, setChecked] = useState()
+  // const [currentArrTodo, setCurrentArrTodo] = useState([]);
+
+  const [arrBtns, setArrBtns] = useState([
+    {
+      text: "All",
+      status: "on",
+      id: "filterAll"
+    },
+    {
+      text: "Active",
+      status: "off",
+      id: "filterActive"
+    },
+    {
+      text: "Complited",
+      status: "off",
+      id: "filterCompiled"
+    }
+  ])
+
 
   const handleAddNewTask = (value) => {
     if (value === '') {
@@ -34,24 +54,27 @@ function App() {
     setArrTodo(newArr);
   }
 
-  const handleChooseTaskList = (status) => {
-    // let newArr;
-    console.log(status)
-    // switch (status) {
-    //   case 'All':
-    //     newArr = arrTodo.map(task => className={styles.todo});
-    //     break;
-    //   case 'Active':
-    //     newArr = arrTodo.map(task => task.isActive ? task.display = "flex" : task.display = "none");
-    //     break;
-    //   case 'Completed':
-    //     newArr = arrTodo.map(task => !task.isActive ? task.display = "flex" : task.display = "none");
-    //     break;
-    //   default:
-    //     newArr = arrTodo;
-    //     break;
-    // }
-    // setArrTodo(newArr);
+  const handleButtonsStatusChange = (id) => {
+    const newArrBtns = arrBtns.map((btn) => {
+      if (btn.id === id) {
+        if (btn.status === 'on') {
+          return btn;
+        } else {
+          btn = btn;
+          btn.status = 'on';
+          return btn;
+        }
+      } else {
+        if (btn.status === 'on') {
+          btn = btn;
+          btn.status = 'off';
+          return btn;
+        } else {
+          return btn;
+        }
+      }
+    });
+    setArrBtns(newArrBtns);
   }
 
   return (
@@ -69,7 +92,8 @@ function App() {
       />
 
       <Footer
-        onChooseTaskList={handleChooseTaskList}
+        arrBtns={arrBtns}
+        onButtonsStatusChange={handleButtonsStatusChange}
       />
     </div>
   );
