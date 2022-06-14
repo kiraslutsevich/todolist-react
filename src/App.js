@@ -10,7 +10,7 @@ import Footer from './components/Footer';
 function App() {
   const [arrTodo, setArrTodo] = useState([]);
 
-  // const [currentArrTodo, setCurrentArrTodo] = useState([]);
+  const [currentArrTodo, setCurrentArrTodo] = useState([...arrTodo]);
 
   const [arrBtns, setArrBtns] = useState([
     {
@@ -30,6 +30,7 @@ function App() {
     }
   ])
 
+  const [status, setStatus] = useState('All')
 
   const handleAddNewTask = (value) => {
     if (value === '') {
@@ -42,19 +43,28 @@ function App() {
     }
     const newArr = [...arrTodo, task];
     setArrTodo(newArr);
+    const newCurrentArrTodo = [...currentArrTodo, task]
+    setCurrentArrTodo(newCurrentArrTodo)
   }
 
   const handleTaskUpdate = (id, data) => {
     const newArr = arrTodo.map((item) => item.id === id ? data : item);
     setArrTodo(newArr);
+    const newCurrentArr = currentArrTodo.map((item) => item.id === id ? data : item);
+    setCurrentArrTodo(newCurrentArr);
+
   }
 
   const handleTaskDelete = (id) => {
     const newArr = arrTodo.filter(task => task.id !== id);
     setArrTodo(newArr);
+    const newCurrentArr = currentArrTodo.filter(task => task.id !== id);
+    setCurrentArrTodo(newCurrentArr);
   }
 
   const handleButtonsStatusChange = (id) => {
+    setCurrentArrTodo(handleStatusChange(id));
+
     const newArrBtns = arrBtns.map((btn) => {
       if (btn.id === id) {
         if (btn.status === 'on') {
@@ -77,6 +87,34 @@ function App() {
     setArrBtns(newArrBtns);
   }
 
+  const handleStatusChange = (id) => {
+    if (id === 'filterAll') {
+      setStatus('All');
+      return arrTodo;
+
+    } else if (id === 'filterActive') {
+      const newCurrentArrTodo = arrTodo.filter(todo => !todo.isActive && todo);
+      setStatus('Completed');
+      return newCurrentArrTodo;
+    } else {
+      const newCurrentArrTodo = arrTodo.filter(todo => todo.isActive && todo);
+      setStatus('Active');
+      return newCurrentArrTodo;
+    }
+  }
+
+  // const handleCurrentArrChange = () => {
+  //   if (status === 'All') {
+  //     return setCurrentArrTodo(arrTodo)
+  //   } else if (status === 'Active') {
+  //     const newCurrentArrTodo = arrTodo.filter(todo => todo.isActive && todo);
+  //     return setCurrentArrTodo(newCurrentArrTodo);
+  //   } else {
+  //     const newCurrentArrTodo = arrTodo.filter(todo => !todo.isActive && todo);
+  //     return setCurrentArrTodo(newCurrentArrTodo);
+  //   }
+  // }
+
   return (
     <div className="app">
       <Header />
@@ -86,7 +124,7 @@ function App() {
       />
 
       <TodoList
-        arrTodo={arrTodo}
+        currentArrTodo={currentArrTodo}
         onTaskDelete={handleTaskDelete}
         onTaskUpdate={handleTaskUpdate}
       />
@@ -100,3 +138,6 @@ function App() {
 }
 
 export default App;
+
+
+//фильтровать по статусу а не по айди в отдельной функции и вызывать ее когда любой рендер

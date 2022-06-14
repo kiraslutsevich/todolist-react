@@ -7,6 +7,7 @@ const Category = (props) => {
     <button
       className={status === 'on' ? styles.active : styles.passive}
       onClick={() => onButtonsStatusChange(id)}
+
     >
       {text}
     </button >

@@ -2,10 +2,10 @@ import styles from './TodoList.module.css'
 import Todo from './Todo';
 
 const TodoList = (props) => {
-  const { onTaskUpdate, arrTodo, onTaskDelete } = props;
+  const { onTaskUpdate, currentArrTodo, onTaskDelete } = props;
   return (
     <div className={styles.todoList}>
-      {arrTodo.map((task) => (
+      {currentArrTodo.map((task) => (
         <Todo
           key={task.id}
           task={task}
