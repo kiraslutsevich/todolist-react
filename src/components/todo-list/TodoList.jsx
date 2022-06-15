@@ -1,16 +1,16 @@
 import styles from './TodoList.module.css'
-import Todo from './Todo';
+import Todo from './todo/Todo';
 
 const TodoList = (props) => {
-  const { onTaskUpdate, currentArrTodo, onTaskDelete } = props;
+  const { onTodoUpdate, onTodoDelete, todoList } = props;
   return (
     <div className={styles.todoList}>
-      {currentArrTodo.map((task) => (
+      {todoList.map((task) => (
         <Todo
           key={task.id}
           task={task}
-          onTaskDelete={onTaskDelete}
-          onTaskUpdate={onTaskUpdate}
+          onTodoDelete={onTodoDelete}
+          onTodoUpdate={onTodoUpdate}
         />
       ))}
     </div>

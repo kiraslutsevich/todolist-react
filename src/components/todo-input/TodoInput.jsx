@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styles from './TodoInput.module.css'
 
 const TodoInput = (props) => {
-  const { onAddNewTask } = props;
+  const { onTodoCreate } = props;
   const [value, setValue] = useState('');
   return (
     <div
@@ -18,7 +18,7 @@ const TodoInput = (props) => {
       <button
         className={styles.btn}
         onClick={() => {
-          onAddNewTask(value)
+          onTodoCreate(value)
           setValue('')
         }}
       >

@@ -2,12 +2,12 @@ import styles from './Footer.module.css';
 import Filtres from './Filtres';
 
 const Footer = (props) => {
-  const { arrBtns, onButtonsStatusChange } = props;
+  const { activeTasksCounter, onFilterChange } = props;
   return (
     <footer className={styles.footer}>
       <Filtres
-        arrBtns={arrBtns}
-        onButtonsStatusChange={onButtonsStatusChange}
+        onFilterChange={onFilterChange}
+        activeTasksCounter={activeTasksCounter}
       />
     </footer>
   )
