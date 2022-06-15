@@ -42,7 +42,6 @@ const App = () => {
   };
 
   const handleSelectAll = () => {
-
     const value = todoList.every((item) => item.isCompleted);
 
     const changeStatusOfTask = (value) => {
@@ -51,10 +50,13 @@ const App = () => {
       });
       setTodoList(newArr);
     }
-
     changeStatusOfTask(value);
-
   };
+
+  const handleClearCompleted = () => {
+    const newArr = todoList.filter(task => !task.isCompleted);
+    setTodoList(newArr);
+  }
 
   let activeTasksCounter = 0;
 
@@ -91,6 +93,7 @@ const App = () => {
       <Footer
         activeTasksCounter={activeTasksCounter}
         onFilterChange={handleFilterChange}
+        onCompletedClear={handleClearCompleted}
       />
     </div>
   );

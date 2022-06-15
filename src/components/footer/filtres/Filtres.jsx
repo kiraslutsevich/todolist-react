@@ -1,19 +1,28 @@
 import styles from './Filtres.module.css';
 import Category from './category/Category';
-import CounterActiveTasks from './counter-active-tasks/CounterActiveTasks';
-import BtnDelCompletedTasks from './btn-del-comleted-tasks/BtnDelCompletedTasks';
 
 const Filtres = (props) => {
-  const { activeTasksCounter, onFilterChange } = props;
+  const { onFilterChange } = props;
 
   return (
     <div className={styles.list}>
-      <CounterActiveTasks
-        count={activeTasksCounter}
+      <Category
+        text="All"
+        id="all"
+        onFilterChange={onFilterChange}
       />
-      <Category text="All" id="all" onFilterChange={onFilterChange} />
-      <Category text="Active" id="active" onFilterChange={onFilterChange} />
-      <Category text="Completed" id="completed" onFilterChange={onFilterChange} />
+
+      <Category
+        text="Active"
+        id="active"
+        onFilterChange={onFilterChange}
+      />
+
+      <Category
+        text="Completed"
+        id="completed"
+        onFilterChange={onFilterChange}
+      />
     </div>
   )
 }

@@ -1,9 +1,9 @@
 import styles from './BtnDelCompletedTasks.module.css';
 
 const BtnDelCompletedTasks = (props) => {
-  const { onCompletedTasksDelete } = props;
+  const { onCompletedClear } = props;
   return (
-    <button onClick={(e) => onCompletedTasksDelete()}>
+    <button onClick={() => onCompletedClear()}>
       Clear completed
     </button>
   )
