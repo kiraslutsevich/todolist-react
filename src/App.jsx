@@ -3,7 +3,7 @@ import './App.css';
 import Header from './components/Header';
 import TodoInput from './components/todo-input/TodoInput';
 import TodoList from './components/todo-list/TodoList';
-import Footer from './components/Footer';
+import Footer from './components/footer/Footer';
 import ToggleAll from './components/ToggleAll';
 
 const App = () => {
@@ -41,6 +41,21 @@ const App = () => {
     setFilter(id);
   };
 
+  const handleSelectAll = () => {
+
+    const value = todoList.every((item) => item.isCompleted);
+
+    const changeStatusOfTask = (value) => {
+      const newArr = todoList.map(task => {
+        return { ...task, isCompleted: !value }
+      });
+      setTodoList(newArr);
+    }
+
+    changeStatusOfTask(value);
+
+  };
+
   let activeTasksCounter = 0;
 
   const filteredList = todoList.filter((task) => {
@@ -55,13 +70,13 @@ const App = () => {
     return task.isCompleted === requiredStatus;
   });
 
-
-
   return (
     <div className="app">
       <Header />
       <section className="main">
-        {/* <ToggleAll /> */}
+        <ToggleAll
+          onAllSelect={handleSelectAll}
+        />
 
         <TodoInput
           onTodoCreate={handleTodoCreate}
@@ -79,6 +94,6 @@ const App = () => {
       />
     </div>
   );
-}
+};
 
 export default App;

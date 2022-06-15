@@ -1,7 +1,7 @@
 import styles from './Filtres.module.css';
-import Category from './Category';
-import CounterActiveTasks from './CounterActiveTasks';
-import BtnDelCompletedTasks from './BtnDelCompletedTasks';
+import Category from './category/Category';
+import CounterActiveTasks from './counter-active-tasks/CounterActiveTasks';
+import BtnDelCompletedTasks from './btn-del-comleted-tasks/BtnDelCompletedTasks';
 
 const Filtres = (props) => {
   const { activeTasksCounter, onFilterChange } = props;

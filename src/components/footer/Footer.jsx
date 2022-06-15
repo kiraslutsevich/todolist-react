@@ -1,5 +1,5 @@
 import styles from './Footer.module.css';
-import Filtres from './Filtres';
+import Filtres from './filtres/Filtres';
 
 const Footer = (props) => {
   const { activeTasksCounter, onFilterChange } = props;

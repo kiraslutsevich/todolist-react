@@ -1,8 +1,11 @@
 import styles from './ToggleAll.module.css';
 
-const ToggleAll = () => {
+const ToggleAll = (props) => {
+  const { onAllSelect } = props;
   return (
-    <button>
+    <button
+      onClick={() => onAllSelect()}
+    >
       ❯
     </button>
   )
