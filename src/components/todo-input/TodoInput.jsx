@@ -5,26 +5,28 @@ import styles from './TodoInput.module.css'
 const TodoInput = (props) => {
   const { onTodoCreate } = props;
   const [value, setValue] = useState('');
+
+  const onSubmit = (ev) => {
+    ev.preventDefault();
+    onTodoCreate(value.trim())
+    setValue('');
+  };
+
   return (
-    <div
-      className={styles.input}
-    >
+    <form onSubmit={onSubmit}>
       <input
         value={value}
-        onChange={(e) => {
-          setValue(e.target.value)
+        onChange={(ev) => {
+          setValue(ev.target.value)
         }}
       />
       <button
         className={styles.btn}
-        onClick={() => {
-          onTodoCreate(value)
-          setValue('')
-        }}
+        type="submit"
       >
         +
       </button>
-    </div>
+    </form>
   )
 }
 

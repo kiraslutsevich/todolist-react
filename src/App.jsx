@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import TodoInput from './components/todo-input/TodoInput';
@@ -7,12 +7,48 @@ import Footer from './components/footer/Footer';
 import ToggleAll from './components/ToggleAll';
 
 const App = () => {
-  const [todoList, setTodoList] = React.useState([]);
-  const [filter, setFilter] = React.useState('all');
+  const [todoList, setTodoList] = React.useState(
+    JSON.parse(localStorage.getItem('todos')) || []
+  );
+
+  const [filter, setFilter] = React.useState(
+    localStorage.getItem('filter') || 'all'
+  )
 
   React.useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todoList));
+    saveData('todos', todoList);
   }, [todoList]);
+
+  React.useEffect(() => {
+    saveData('filter', filter);
+  }, [filter]);
+
+  let [filteredList, activeTasksCounter] = useMemo(() => {
+    let activeTasksCounter = 0;
+    const list = todoList.filter((task) => {
+      if (!task.isCompleted) {
+        activeTasksCounter++;
+      }
+      if (filter === 'all') {
+        return true;
+      }
+      const requiredStatus = filter === 'completed';
+      return task.isCompleted === requiredStatus;
+    })
+    return [list, activeTasksCounter]
+  }, [todoList, filter])
+
+  const saveData = (key, data) => {
+    if (!(typeof data === 'string')) {
+      data = JSON.stringify(data);
+    }
+    localStorage.setItem(key, data);
+  }
+
+  const createRandomId = () => {
+    return Math.floor(Math.random() * 10000);
+  }
+
 
   const handleTodoCreate = (value) => {
     if (!value) {
@@ -21,7 +57,7 @@ const App = () => {
     const task = {
       text: value,
       isCompleted: false,
-      id: Math.floor(Math.random() * 10000),
+      id: createRandomId(),
     }
     const newArr = [...todoList, task];
     setTodoList(newArr);
@@ -37,40 +73,21 @@ const App = () => {
     setTodoList(newArr);
   };
 
-  const handleFilterChange = (id) => {
-    setFilter(id);
-  };
-
   const handleSelectAll = () => {
-    const value = todoList.every((item) => item.isCompleted);
-
-    const changeStatusOfTask = (value) => {
-      const newArr = todoList.map(task => {
-        return { ...task, isCompleted: !value }
-      });
-      setTodoList(newArr);
-    }
-    changeStatusOfTask(value);
+    const newArr = todoList.map(task => {
+      if (activeTasksCounter === 0) {
+        return { ...task, isCompleted: false }
+      } else {
+        return { ...task, isCompleted: true }
+      }
+    });
+    setTodoList(newArr);
   };
 
   const handleClearCompleted = () => {
     const newArr = todoList.filter(task => !task.isCompleted);
     setTodoList(newArr);
   }
-
-  let activeTasksCounter = 0;
-
-  const filteredList = todoList.filter((task) => {
-    if (!task.isCompleted) {
-      activeTasksCounter++;
-    }
-    if (filter === 'all') {
-      return true;
-    }
-
-    const requiredStatus = filter === 'completed';
-    return task.isCompleted === requiredStatus;
-  });
 
   return (
     <div className="app">
@@ -85,14 +102,15 @@ const App = () => {
         />
 
         <TodoList
-          todoList={filteredList}
+          filteredList={filteredList}
           onTodoDelete={handleTodoDelete}
           onTodoUpdate={handleTodoUpdate}
+          // editTask={editTask}
         />
       </section>
       <Footer
         activeTasksCounter={activeTasksCounter}
-        onFilterChange={handleFilterChange}
+        onFilterChange={setFilter}
         onCompletedClear={handleClearCompleted}
       />
     </div>
