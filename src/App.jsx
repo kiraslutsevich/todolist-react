@@ -64,7 +64,7 @@ const App = () => {
   };
 
   const handleTodoUpdate = (id, data) => {
-    const newArr = todoList.map((item) => item.id === id ? data : item);
+    const newArr = todoList.map((task) => task.id === id ? data : task);
     setTodoList(newArr);
   };
 
@@ -105,7 +105,6 @@ const App = () => {
           filteredList={filteredList}
           onTodoDelete={handleTodoDelete}
           onTodoUpdate={handleTodoUpdate}
-          // editTask={editTask}
         />
       </section>
       <Footer

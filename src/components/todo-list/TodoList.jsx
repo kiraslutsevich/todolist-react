@@ -2,7 +2,7 @@ import styles from './TodoList.module.css'
 import Todo from './todo/Todo';
 
 const TodoList = (props) => {
-  const { onTodoUpdate, onTodoDelete, filteredList, editTask } = props;
+  const { onTodoUpdate, onTodoDelete, filteredList } = props;
   return (
     <div className={styles.todoList}>
       {filteredList.map((task) => (
@@ -11,7 +11,6 @@ const TodoList = (props) => {
           task={task}
           onTodoDelete={onTodoDelete}
           onTodoUpdate={onTodoUpdate}
-          editTask={editTask}
         />
       ))}
     </div>
