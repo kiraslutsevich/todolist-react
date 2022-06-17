@@ -1,6 +1,5 @@
 .todo {
   text-align: left;
-  width: 250px;
   height: fit-content;
   position: relative;
 
@@ -28,14 +27,10 @@
   border: none;
   color: darkgrey;
   font-family: 'Poppins';
-  width: 90%;
 }
 
 .text {
-  margin-block-start: 0;
-  margin-block-end: 0;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
+  padding: 0px 40px;
 }
 
 .delete {
@@ -47,6 +42,18 @@
   transform: rotate(45deg);
   font-weight: 900;
   font-size: 20px;
+}
+
+@media (max-width:420px) {
+  .todo {
+    position: relative;
+  }
+
+  .delete {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 }
 
 .delete:hover {

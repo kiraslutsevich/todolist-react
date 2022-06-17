@@ -39,6 +39,7 @@ const Todo = (props) => {
             autoFocus
           />
           : <div
+            className={styles.text}
             onDoubleClick={
               () => setIsEditing(true)}
           >

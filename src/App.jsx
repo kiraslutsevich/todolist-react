@@ -102,16 +102,21 @@ const App = () => {
         />
       </section>
       <TodoList
-          filteredList={filteredList}
-          onTodoDelete={handleTodoDelete}
-          onTodoUpdate={handleTodoUpdate}
-        />
-      <Footer
-        activeTasksCounter={activeTasksCounter}
-        onFilterChange={setFilter}
-        onCompletedClear={handleClearCompleted}
-        filter={filter}
+        filteredList={filteredList}
+        onTodoDelete={handleTodoDelete}
+        onTodoUpdate={handleTodoUpdate}
       />
+
+      {(todoList.length === 0) ||
+        <Footer
+          activeTasksCounter={activeTasksCounter}
+          onFilterChange={setFilter}
+          onCompletedClear={handleClearCompleted}
+          filter={filter}
+        />
+      }
+
+
     </div>
   );
 };
