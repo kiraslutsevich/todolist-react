@@ -2,19 +2,34 @@
   text-align: left;
   width: 250px;
   height: fit-content;
+  position: relative;
 
   padding: 2px 6px;
-  background: white;
   border-radius: 1px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 96%;
+  background: none;
+  border: solid 1px rgb(247, 247, 247);
+}
+
+.todo:hover {
+  background-color: rgb(75, 75, 75);
 }
 
 .none {
   display: none;
 }
 
+.editText {
+  background: none;
+  outline: none;
+  border: none;
+  color: darkgrey;
+  font-family: 'Poppins';
+  width: 90%;
+}
 
 .text {
   margin-block-start: 0;
@@ -26,4 +41,51 @@
 .delete {
   width: 22px;
   height: 22px;
+  background: none;
+  border: none;
+  color: darkgray;
+  transform: rotate(45deg);
+  font-weight: 900;
+  font-size: 20px;
+}
+
+.delete:hover {
+  color: aquamarine;
+}
+
+
+.checkInput {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  margin: 10px 0 0 20px;
+}
+
+.checkboxText {
+  position: absolute;
+  cursor: pointer;
+}
+
+.checkboxText:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -12px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid aquamarine;
+}
+
+.checkboxText:after {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 10px;
+}
+
+.checkbox input:checked+.checkboxText:before {
+  content: '\2714';
+  text-align: center;
+  color: aquamarine;
 }

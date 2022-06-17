@@ -9,19 +9,29 @@ const Todo = (props) => {
 
   return (
     <div className={styles.todo}>
-      <input
-        type="checkbox"
-        checked={task.isCompleted}
-        onChange={
-          () => onTodoUpdate(task.id, { ...task, isCompleted: !task.isCompleted })}
-      />
+      <label className={styles.checkbox}>
+        <input
+          className={styles.checkInput}
+          type="checkbox"
+          checked={task.isCompleted}
+          onChange={
+            () => onTodoUpdate(task.id, { ...task, isCompleted: !task.isCompleted })}
+        />
+        <div
+          className={styles.checkboxText}>
+
+        </div>
+      </label>
       <div>
         {isEditing ?
           <input
+            className={styles.editText}
             value={inputValue}
+
             onChange={(ev) => {
               setInputValue(ev.target.value);
             }}
+
             onBlur={() => {
               onTodoUpdate(task.id, { ...task, text: inputValue.trim() });
               setIsEditing(false);
@@ -41,7 +51,7 @@ const Todo = (props) => {
         onClick={
           () => onTodoDelete(task.id)}
       >
-        x
+        +
       </button>
     </div >
   );

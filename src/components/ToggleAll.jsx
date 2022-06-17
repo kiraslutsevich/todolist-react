@@ -4,6 +4,7 @@ const ToggleAll = (props) => {
   const { onAllSelect } = props;
   return (
     <button
+      className={styles.button}
       onClick={() => onAllSelect()}
     >
       ❯

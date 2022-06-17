@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React from 'react';
 import './App.css';
 import Header from './components/Header';
 import TodoInput from './components/todo-input/TodoInput';
@@ -23,7 +23,7 @@ const App = () => {
     saveData('filter', filter);
   }, [filter]);
 
-  let [filteredList, activeTasksCounter] = useMemo(() => {
+  let [filteredList, activeTasksCounter] = React.useMemo(() => {
     let activeTasksCounter = 0;
     const list = todoList.filter((task) => {
       if (!task.isCompleted) {
@@ -92,7 +92,7 @@ const App = () => {
   return (
     <div className="app">
       <Header />
-      <section className="main">
+      <section className="input">
         <ToggleAll
           onAllSelect={handleSelectAll}
         />
@@ -100,17 +100,17 @@ const App = () => {
         <TodoInput
           onTodoCreate={handleTodoCreate}
         />
-
-        <TodoList
+      </section>
+      <TodoList
           filteredList={filteredList}
           onTodoDelete={handleTodoDelete}
           onTodoUpdate={handleTodoUpdate}
         />
-      </section>
       <Footer
         activeTasksCounter={activeTasksCounter}
         onFilterChange={setFilter}
         onCompletedClear={handleClearCompleted}
+        filter={filter}
       />
     </div>
   );

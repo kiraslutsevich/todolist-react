@@ -13,8 +13,13 @@ const TodoInput = (props) => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form
+      className={styles.form}
+      onSubmit={onSubmit}
+    >
       <input
+        placeholder='What needs to be done?'
+        className={styles.input}
         value={value}
         onChange={(ev) => {
           setValue(ev.target.value)

@@ -1,7 +1,21 @@
 .passive {
-  background-color: rgb(255, 140, 163);
+  border: 1px solid darkgray;
+  color: darkgray;
+}
+
+.passive:hover {
+  border: 1px solid rgb(197, 197, 197);
+  color: rgb(197, 197, 197);
 }
 
 .active {
-  background-color: rgb(214, 241, 116);
+  color: aquamarine;
+  border: 1px solid aquamarine;
+
+}
+
+.active,
+.passive {
+  background: none;
+  border-radius: 2px;
 }
