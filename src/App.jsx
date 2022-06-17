@@ -6,24 +6,37 @@ import TodoList from './components/todo-list/TodoList';
 import Footer from './components/footer/Footer';
 import ToggleAll from './components/ToggleAll';
 
+
+
 const App = () => {
+
+  const LIST_STORAGE_KEY = 'todos';
+  const FILTER_STORAGE_KEY = 'filter';
+
+
+  const createRandomId = () => {
+    return Math.floor(Math.random() * 10000);
+  };
+
   const [todoList, setTodoList] = React.useState(
-    JSON.parse(localStorage.getItem('todos')) || []
+    // localStorageHelper.get(LIST_STORAGE_KEY) ||
+    []
   );
 
   const [filter, setFilter] = React.useState(
-    localStorage.getItem('filter') || 'all'
+    // localStorageHelper.get(FILTER_STORAGE_KEY) ||
+    'all'
   )
 
-  React.useEffect(() => {
-    saveData('todos', todoList);
-  }, [todoList]);
+  // React.useEffect(() => {
+  //   localStorageHelper.get(LIST_STORAGE_KEY, todoList);
+  // }, [todoList]);
 
-  React.useEffect(() => {
-    saveData('filter', filter);
-  }, [filter]);
+  // React.useEffect(() => {
+  //   localStorageHelper.get(FILTER_STORAGE_KEY, filter);
+  // }, [filter]);
 
-  let [filteredList, activeTasksCounter] = React.useMemo(() => {
+  const [filteredList, activeTasksCounter] = React.useMemo(() => {
     let activeTasksCounter = 0;
     const list = todoList.filter((task) => {
       if (!task.isCompleted) {
@@ -37,18 +50,6 @@ const App = () => {
     })
     return [list, activeTasksCounter]
   }, [todoList, filter])
-
-  const saveData = (key, data) => {
-    if (!(typeof data === 'string')) {
-      data = JSON.stringify(data);
-    }
-    localStorage.setItem(key, data);
-  }
-
-  const createRandomId = () => {
-    return Math.floor(Math.random() * 10000);
-  }
-
 
   const handleTodoCreate = (value) => {
     if (!value) {
@@ -92,22 +93,20 @@ const App = () => {
   return (
     <div className="app">
       <Header />
-      <section className="input">
-        <ToggleAll
-          onAllSelect={handleSelectAll}
-        />
 
-        <TodoInput
-          onTodoCreate={handleTodoCreate}
-        />
+      <section className="input">
+        <ToggleAll onAllSelect={handleSelectAll} />
+
+        <TodoInput onTodoCreate={handleTodoCreate} />
       </section>
+
       <TodoList
         filteredList={filteredList}
         onTodoDelete={handleTodoDelete}
         onTodoUpdate={handleTodoUpdate}
       />
 
-      {(todoList.length === 0) ||
+      {todoList.length > 0 &&
         <Footer
           activeTasksCounter={activeTasksCounter}
           onFilterChange={setFilter}
@@ -115,8 +114,6 @@ const App = () => {
           filter={filter}
         />
       }
-
-
     </div>
   );
 };

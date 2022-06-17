@@ -9,7 +9,7 @@ const Category = (props) => {
       onClick={() => onFilterChange(id)}
     >
       {text}
-    </button >
+    </button>
   )
 }
 
