@@ -5,36 +5,27 @@ import TodoInput from './components/todo-input/TodoInput';
 import TodoList from './components/todo-list/TodoList';
 import Footer from './components/footer/Footer';
 import ToggleAll from './components/ToggleAll';
+import LocalStorageHelper from './LocalStorageHelper';
+import CreateRandomId from './CreateRandomId';
+
+
 
 
 
 const App = () => {
+  const LIST_LOCALSTORAGE_KEY = 'todos';
+  const FILTER_LOCALSTORAGE_KEY = 'filter';
 
-  const LIST_STORAGE_KEY = 'todos';
-  const FILTER_STORAGE_KEY = 'filter';
+  const [todoList, setTodoList] = React.useState(LocalStorageHelper.get(LIST_LOCALSTORAGE_KEY) || []);
+  const [filter, setFilter] = React.useState(LocalStorageHelper.get(FILTER_LOCALSTORAGE_KEY) || 'all');
 
+  React.useEffect(() => {
+    LocalStorageHelper.set(LIST_LOCALSTORAGE_KEY, todoList)
+  }, [todoList]);
 
-  const createRandomId = () => {
-    return Math.floor(Math.random() * 10000);
-  };
-
-  const [todoList, setTodoList] = React.useState(
-    // localStorageHelper.get(LIST_STORAGE_KEY) ||
-    []
-  );
-
-  const [filter, setFilter] = React.useState(
-    // localStorageHelper.get(FILTER_STORAGE_KEY) ||
-    'all'
-  )
-
-  // React.useEffect(() => {
-  //   localStorageHelper.get(LIST_STORAGE_KEY, todoList);
-  // }, [todoList]);
-
-  // React.useEffect(() => {
-  //   localStorageHelper.get(FILTER_STORAGE_KEY, filter);
-  // }, [filter]);
+  React.useEffect(() => {
+    LocalStorageHelper.set(FILTER_LOCALSTORAGE_KEY, filter)
+  }, [filter]);
 
   const [filteredList, activeTasksCounter] = React.useMemo(() => {
     let activeTasksCounter = 0;
@@ -58,7 +49,7 @@ const App = () => {
     const task = {
       text: value,
       isCompleted: false,
-      id: createRandomId(),
+      id: CreateRandomId(),
     }
     const newArr = [...todoList, task];
     setTodoList(newArr);
