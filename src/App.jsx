@@ -9,9 +9,6 @@ import LocalStorageHelper from './LocalStorageHelper';
 import CreateRandomId from './CreateRandomId';
 
 
-
-
-
 const App = () => {
   const LIST_LOCALSTORAGE_KEY = 'todos';
   const FILTER_LOCALSTORAGE_KEY = 'filter';
