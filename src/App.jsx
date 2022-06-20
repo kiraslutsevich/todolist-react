@@ -9,19 +9,19 @@ import LocalStorageHelper from './LocalStorageHelper';
 import CreateRandomId from './CreateRandomId';
 
 
-const App = () => {
-  const LIST_LOCALSTORAGE_KEY = 'todos';
-  const FILTER_LOCALSTORAGE_KEY = 'filter';
+const LIST_LOCALSTORAGE_KEY = new LocalStorageHelper('todos');
+const FILTER_LOCALSTORAGE_KEY = new LocalStorageHelper('filter');
 
-  const [todoList, setTodoList] = React.useState(LocalStorageHelper.get(LIST_LOCALSTORAGE_KEY) || []);
-  const [filter, setFilter] = React.useState(LocalStorageHelper.get(FILTER_LOCALSTORAGE_KEY) || 'all');
+const App = () => {
+  const [todoList, setTodoList] = React.useState(LIST_LOCALSTORAGE_KEY.get() || []);
+  const [filter, setFilter] = React.useState(FILTER_LOCALSTORAGE_KEY.get() || 'all');
 
   React.useEffect(() => {
-    LocalStorageHelper.set(LIST_LOCALSTORAGE_KEY, todoList)
+    LIST_LOCALSTORAGE_KEY.set(todoList)
   }, [todoList]);
 
   React.useEffect(() => {
-    LocalStorageHelper.set(FILTER_LOCALSTORAGE_KEY, filter)
+    FILTER_LOCALSTORAGE_KEY.set(filter);
   }, [filter]);
 
   const [filteredList, activeTasksCounter] = React.useMemo(() => {
